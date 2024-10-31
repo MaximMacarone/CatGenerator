@@ -9,6 +9,7 @@ import UIKit
 
 class TextedCatViewController: UIViewController {
 
+    @IBOutlet weak var fullScreenButton: UIButton!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var catImageView: UIImageView!
@@ -39,12 +40,14 @@ class TextedCatViewController: UIViewController {
         textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
         generateButton.isEnabled = false
+        fullScreenButton.isEnabled = false
     }
     
 
     @IBAction func didTapButton(_ sender: Any) {
         catImageView.image = UIImage(systemName: "cat")
         generateButton.isEnabled = false
+        fullScreenButton.isEnabled = false
         textField.isEnabled = false
         activityIndicator.startAnimating()
         statusLabel.text = "Начинаю загрузку кота!"
@@ -55,6 +58,7 @@ class TextedCatViewController: UIViewController {
         generateButton.isEnabled = !textField.text!.isEmpty
         statusLabel.text = !textField.text!.isEmpty ? "Готово к загрузке!" : "Введите текст!"
     }
+    
     
     private func downloadCat(_ text: String) {
         guard let url = URL(string: "https://cataas.com/cat/says/\(text)") else {
@@ -68,9 +72,11 @@ class TextedCatViewController: UIViewController {
             
             DispatchQueue.main.async { [weak self] in
                 self?.catImageView.image = UIImage(data: data)
+                self?.imgData = data
                 self?.statusLabel.text = "Загрузка кота закончена"
                 self?.activityIndicator.stopAnimating()
                 self?.generateButton.isEnabled = true
+                self?.fullScreenButton.isEnabled = true
                 self?.textField.isEnabled = true
             }
         }
@@ -95,6 +101,23 @@ class TextedCatViewController: UIViewController {
     @objc
     private func didTapView() {
         view.endEditing(true)
+    }
+    
+    private var imgData: Data?
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        
+        if segue.identifier == "showFullScreen" {
+            guard
+                let viewController: FullScreenViewController = segue.destination as? FullScreenViewController,
+                let imgData = imgData
+            else {
+                return
+            }
+            
+            viewController.setInput(with: Input(imageData: imgData))
+        }
     }
     
     /*
