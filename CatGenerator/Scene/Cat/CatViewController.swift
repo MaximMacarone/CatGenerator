@@ -9,6 +9,7 @@ import UIKit
 
 class CatViewController: UIViewController {
 
+    @IBOutlet weak var fullScreenButton: UIButton!
     @IBOutlet weak var catImageView: UIImageView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var statusLabel: UILabel!
@@ -21,6 +22,7 @@ class CatViewController: UIViewController {
         title = "Cat Generator"
         
         statusLabel.text = "Готов к загрузке!"
+        fullScreenButton.isEnabled = false
         activityIndicator.hidesWhenStopped = true
     }
     
@@ -36,9 +38,11 @@ class CatViewController: UIViewController {
             
             DispatchQueue.main.async { [weak self] in
                 self?.catImageView.image = UIImage(data: data)
+                self?.imgData = data
                 self?.statusLabel.text = "Загрузка кота закончена"
                 self?.activityIndicator.stopAnimating()
                 self?.generateButton.isEnabled = true
+                self?.fullScreenButton.isEnabled = true
             }
         }
         
@@ -49,9 +53,27 @@ class CatViewController: UIViewController {
     @IBAction func didTapButton(_ sender: Any) {
         catImageView.image = UIImage(systemName: "cat")
         generateButton.isEnabled = false
+        fullScreenButton.isEnabled = false
         activityIndicator.startAnimating()
         statusLabel.text = "Начинаю загрузку кота!"
         downloadCat()
+    }
+    
+    private var imgData: Data?
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        
+        if segue.identifier == "showFullScreen" {
+            guard
+                let viewController: FullScreenViewController = segue.destination as? FullScreenViewController,
+                let imgData = imgData
+            else {
+                return
+            }
+            
+            viewController.setInput(with: Input(imageData: imgData))
+        }
     }
 }
 

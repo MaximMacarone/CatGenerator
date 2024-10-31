@@ -43,7 +43,7 @@
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qHN-B4-gL8">
-                                                <rect key="frame" x="123.00000000000001" y="484" width="147.33333333333337" height="35"/>
+                                                <rect key="frame" x="20" y="484" width="147.33333333333334" height="35"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="tinted" title="Генерация кота" cornerStyle="capsule"/>
                                                 <connections>
@@ -56,12 +56,22 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W50-bI-DVp">
+                                                <rect key="frame" x="182.33333333333334" y="484" width="92.666666666666657" height="35"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Открыть"/>
+                                                <connections>
+                                                    <segue destination="5RT-ZS-hwk" kind="presentation" identifier="showFullScreen" id="a80-Oa-Kfb"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstItem="4uv-5S-KeB" firstAttribute="centerX" secondItem="CQg-sI-eup" secondAttribute="centerX" id="0kG-M7-5Si"/>
                                             <constraint firstItem="CQg-sI-eup" firstAttribute="leading" secondItem="RXt-xi-HrE" secondAttribute="leading" constant="24" id="0st-No-goW"/>
                                             <constraint firstAttribute="trailing" secondItem="CQg-sI-eup" secondAttribute="trailing" constant="24" id="2NU-Ux-GpA"/>
+                                            <constraint firstItem="W50-bI-DVp" firstAttribute="leading" secondItem="qHN-B4-gL8" secondAttribute="trailing" constant="15" id="4GF-bJ-KpG"/>
+                                            <constraint firstItem="qHN-B4-gL8" firstAttribute="leading" secondItem="RXt-xi-HrE" secondAttribute="leading" constant="20" id="5Fv-FC-r70"/>
                                             <constraint firstItem="CQg-sI-eup" firstAttribute="centerX" secondItem="RXt-xi-HrE" secondAttribute="centerX" id="5xe-qW-CdD"/>
                                             <constraint firstItem="Xaa-QC-TMc" firstAttribute="leading" secondItem="RXt-xi-HrE" secondAttribute="leading" constant="24" id="Axb-2F-jEq"/>
                                             <constraint firstAttribute="trailing" secondItem="Xaa-QC-TMc" secondAttribute="trailing" constant="24" id="Jki-yp-Fra"/>
@@ -73,7 +83,7 @@
                                             <constraint firstItem="4uv-5S-KeB" firstAttribute="centerY" secondItem="CQg-sI-eup" secondAttribute="centerY" id="iar-3Y-ZEW"/>
                                             <constraint firstItem="qHN-B4-gL8" firstAttribute="top" secondItem="Xaa-QC-TMc" secondAttribute="bottom" constant="25" id="vAX-AS-YOe"/>
                                             <constraint firstItem="ACD-ot-cvC" firstAttribute="top" secondItem="qHN-B4-gL8" secondAttribute="bottom" constant="25" id="wv0-En-JcA"/>
-                                            <constraint firstItem="qHN-B4-gL8" firstAttribute="centerX" secondItem="RXt-xi-HrE" secondAttribute="centerX" id="zhY-Bs-8CG"/>
+                                            <constraint firstItem="W50-bI-DVp" firstAttribute="top" secondItem="Xaa-QC-TMc" secondAttribute="bottom" constant="25" id="ybx-BJ-rNf"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -101,6 +111,7 @@
                     <connections>
                         <outlet property="activityIndicator" destination="4uv-5S-KeB" id="EBx-Ei-Nwv"/>
                         <outlet property="catImageView" destination="CQg-sI-eup" id="nle-XE-iVI"/>
+                        <outlet property="fullScreenButton" destination="W50-bI-DVp" id="N6k-5T-CLH"/>
                         <outlet property="generateButton" destination="qHN-B4-gL8" id="bmt-Ar-5L2"/>
                         <outlet property="scrollView" destination="4ub-uW-M2U" id="mbM-Oo-cDv"/>
                         <outlet property="statusLabel" destination="ACD-ot-cvC" id="jFj-Jz-N86"/>
@@ -111,6 +122,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="18" y="-2"/>
+        </scene>
+        <!--FullScreen-->
+        <scene sceneID="2nX-ZV-fx3">
+            <objects>
+                <viewControllerPlaceholder storyboardName="FullScreen" id="5RT-ZS-hwk" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9tU-RD-1II" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="846" y="13"/>
         </scene>
     </scenes>
     <resources>
